@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public interface Bouquet {
 
-    public double getFinalPrice(ArrayList<Flowers> list, double sum);
-    public void displayCollection(ArrayList<Flowers> list);
-    public ArrayList<Flowers> createFirstCollection();
+    public double getFinalPrice(ArrayList<Flowers> list, double totalPrice);
+    public void displayBouquet(ArrayList<Flowers> list);
+    public ArrayList<Flowers> createDefaultBouquet();
 
     public default void findFlowerByLength(ArrayList<Flowers> list) {
 

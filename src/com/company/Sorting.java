@@ -1,7 +1,5 @@
 package com.company;
 
-import com.company.Flowers;
-
 import java.util.Comparator;
 
 public class Sorting implements Comparator<Flowers> {

@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -9,41 +10,39 @@ public class CreateBouquet implements Bouquet {
     public static void createBouquet() {
 
         CreateBouquet createBouquet = new CreateBouquet();
-        ArrayList<Flowers> list = createBouquet.createFirstCollection();
+        ArrayList<Flowers> list = createBouquet.createDefaultBouquet();
 
-        createBouquet.displayCollection(list);
+        createBouquet.displayBouquet(list);
 
-        double res = createBouquet.getFinalPrice(list, 0);
-        System.out.println("\nTotal cost of your bouquet is: " + res + "\n");
+        double totalPrice=0;
+        totalPrice = createBouquet.getFinalPrice(list, totalPrice);
+        System.out.println("\nTotal cost of your bouquet is: " + totalPrice + "\n");
 
         System.out.println("Sorted list by Freshness:\n");
         Collections.sort(list, new Sorting());
-        createBouquet.displayCollection(list);
+        createBouquet.displayBouquet(list);
 
-        System.out.println("\nAnd now let's find some flowers by their length.\nPlease enter first and last numbers of range");
+        System.out.println("\n" +
+                "And now let's find some flowers by their length.\n" +
+                "Please enter first and last numbers of range");
         createBouquet.findFlowerByLength(list);
     }
 
-    // create collection
-    public ArrayList<Flowers> createFirstCollection(){
-        ArrayList<Flowers> list = new ArrayList<Flowers>();
-        Roses rosesOne = new Roses("Pink Rose", 25.5, 10, 1);
-        list.add(rosesOne);
-        Roses rosesTwo = new Roses("White Rose", 30, 15, 2);
-        list.add(rosesTwo);
-        Tulips tulipsOne = new Tulips("Avory Tulip", 15, 14, 1);
-        list.add(tulipsOne);
-        Tulips tulipsTwo = new Tulips("Red Tulip", 20.5, 12, 2);
-        list.add(tulipsTwo);
-        Orchids orchidOne = new Orchids("Violet Orchid", 150, 25, 3);
-        list.add(orchidOne);
-        Orchids orchidTwo = new Orchids("Yellow Orchid", 235, 30, 3);
-        list.add(orchidTwo);
-        return list;
+    // create bouquet
+    public ArrayList<Flowers> createDefaultBouquet(){
+        List<Flowers> list = new ArrayList<>();
+
+        list.add(new Roses("Pink Rose", 25.5, 10, 1));
+        list.add(new Roses("White Rose", 30, 15, 2));
+        list.add(new Tulips("Avory Tulip", 15, 14, 1));
+        list.add(new Tulips("Red Tulip", 20.5, 12, 2));
+        list.add(new Orchids("Violet Orchid", 150, 25, 3));
+        list.add(new Orchids("Yellow Orchid", 235, 30, 3));
+        return (ArrayList<Flowers>) list;
     }
 
-    // display collection
-    public void displayCollection(ArrayList<Flowers> list) {
+    // display bouquet
+    public void displayBouquet(ArrayList<Flowers> list) {
         int i = 1;
         System.out.println("ID: " + " NAME:    " + " 	    	  Price: " + "	Length:  " + " Fresh:");
         for (Flowers vault : list) {
@@ -55,11 +54,12 @@ public class CreateBouquet implements Bouquet {
     }
 
     // count price of bouquet
-    public double getFinalPrice(ArrayList<Flowers> list, double sum) {
+    public double getFinalPrice(ArrayList<Flowers> list, double totalPrice) {
+
         for (Flowers vault : list) {
-            sum += vault.getPrice();
+            totalPrice += vault.getPrice();
         }
-        return sum;
+        return totalPrice;
     }
 
     // find flowers with selected length
